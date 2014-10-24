@@ -28,7 +28,7 @@ class Available
     end
 
     cals.first.events.each do |event|
-      next if event.dtend < Time.now or not event.dtstart.to_date.today?
+      next if event.dtend.to_time < Time.now or not event.dtstart.today?
       rooms[event.location.upcase] ||= []
 
       if Time.now.between?(event.dtstart.to_time, event.dtend.to_time)
