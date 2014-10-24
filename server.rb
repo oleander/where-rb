@@ -3,6 +3,8 @@ require "haml"
 require "sinatra"
 require "rest-client"
 require "time"
+require "date"
+require "active_support"
 
 class Available
   PRIO_ROOMS = [
