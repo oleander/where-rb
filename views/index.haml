@@ -7,4 +7,8 @@
         = room
         - if times.any?
           %span.ui-li-count
-            = times.map{ |span| "#{span.first == Available::NOW ? "Nu" : span.first.strftime("%H:%M")} till #{span.last.strftime("%H:%M")}" }.join(", ")
+            - starts_at = times.first.first
+            - ends_at = times.last.last
+            = starts_at == Available::NOW ? "Nu" : starts_at.strftime("%H:%M")
+            till
+            = ends_at.strftime("%H:%M")
