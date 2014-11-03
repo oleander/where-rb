@@ -22,6 +22,12 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    redis (3.1.0)
+    redis-sinatra (1.4.0)
+      redis-store (~> 1.1.0)
+      sinatra (~> 1.4.0)
+    redis-store (1.1.4)
+      redis (>= 2.2)
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -48,6 +54,7 @@ DEPENDENCIES
   activesupport
   haml
   icalendar
+  redis-sinatra
   rest-client
   sinatra
   sinatra-contrib
