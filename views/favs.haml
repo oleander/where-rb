@@ -1,0 +1,12 @@
+- content_for(:title) { "Favoriter" }
+%ul{data: { role: "listview", count_theme: "c", inset: "true"}}
+  - Available::PRIO_ROOMS.each do |room|
+    %li
+      %a{href: "#"}
+        = room
+        - found_room = @rooms.select {|data| data.first == room}.first
+        - if found_room
+          - if times = found_room.last
+            - if times.any?
+              %span.ui-li-count
+                = times.map{ |span| "#{span.first == Available::NOW ? "Nu" : span.first.strftime("%H:%M")} till #{span.last.strftime("%H:%M")}" }.join(", ")

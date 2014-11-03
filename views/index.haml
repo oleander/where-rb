@@ -1,35 +1,10 @@
-:javascript
-  $(function(){
-    $('#bigtext').bigtext();
-    $("#bigtext").on( "swipeleft", function(){
-      var path = window.location.pathname.match(/\d+/)
-      if(path){
-        var nextPage = parseInt(path[0], 10) + 1;
-      } else {
-        var nextPage = 1;
-      }
-      window.location = "/" + nextPage % #{@max_rooms};
-    });
+- content_for(:title) { "Alla rum" }
 
-    $("#bigtext").on( "swiperight", function(){
-      var path = window.location.pathname.match(/\d+/)
-      if(path){
-        var prevPage = parseInt(path[0], 10) - 1;
-      } else {
-        var prevPage = #{@max_rooms};
-      }
-      window.location = "/" + prevPage % #{@max_rooms};
-    });
-  })
-
-:css
-  .ui-loader.ui-corner-all.ui-body-a.ui-loader-default {
-    display: none;
-  }
-#bigtext{style: 'width: 100%; height: 100%; text-align: center; font-weight: bold; "HelveticaNeue-Light",Helvetica,Arial,sans-serif'}
-  %span
-    = @room
-  %span
-    - unless @spans.empty?
-      Upptagen mellan kl
-      = @spans.map{ |span| "#{span.first.strftime("%H:%M")} och #{span.last.strftime("%H:%M")}" }.join(", ")
+%ul{data: { role: "listview", count_theme: "c", inset: "true"}}
+  - @rooms.each do |room, times|
+    %li
+      %a{href: "#"}
+        = room
+        - if times.any?
+          %span.ui-li-count
+            = times.map{ |span| "#{span.first == Available::NOW ? "Nu" : span.first.strftime("%H:%M")} till #{span.last.strftime("%H:%M")}" }.join(", ")
