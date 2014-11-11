@@ -12,12 +12,12 @@
     %div{data_role: "page"}
       %div{data: { role: "header", position: "fixed"}}
         .ui-btn-left.ui-mini{data: { role: "controlgroup", type: "horizontal"}}
-          %a{href: "/", data: { icon: "home", role: "button"}} Hem
+          %a{href: "/", data: { icon: "home", role: "button", iconpos: "notext"}}
 
         %h1= yield_content(:title) || "Rum"
         .ui-btn-right.ui-mini{data: { role: "controlgroup", type: "horizontal"}}
-          %a{href: "/favs", data: { icon: "star", role: "button"}} Fav
-          %a{href: "/now", data: { icon: "navigation", role: "button"}} Nu
+          %a{href: "/favs", data: { icon: "star", role: "button", iconpos: "notext"}}
+          %a{href: "/now", data: { icon: "navigation", role: "button", iconpos: "notext"}}
 
     %div{data: { role: "content"}}
       = yield
