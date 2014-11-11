@@ -41,3 +41,8 @@ get "/favs" do
   @rooms = rooms
   haml :favs
 end
+
+get "/now" do
+  @rooms = rooms
+  haml :now
+end

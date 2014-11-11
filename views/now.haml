@@ -1,0 +1,19 @@
+- content_for(:title) { "Ledigt närmaste timmen" }
+
+%ul{data: { role: "listview", count_theme: "c", inset: "true"}}
+  - Available::PRIO_ROOMS.each do |room|
+    - found_room = @rooms.select {|data| data.first == room}.first
+    - times = found_room.last || []
+    - next if times.any? { |span| 1.hour.from_now > span.last or 1.hour.from_now.between?((span.first == Available::NOW ? Time.now : span.first), span.last) }
+    %li
+      %a{href: "#"}
+        = room
+        - if found_room
+          - if times.any?
+            %span.ui-li-count
+              - starts_at = times.first.first
+              - ends_at = times.first.last
+              = starts_at == Available::NOW ? "Nu" : starts_at.strftime("%H:%M")
+              till
+              = ends_at.strftime("%H:%M")
+              = "(#{(((starts_at == Available::NOW ? Time.now : starts_at) - Time.now) / ( 60 * 60)).round(1)}h)"
