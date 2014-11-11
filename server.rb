@@ -22,7 +22,7 @@ def rooms
 
   if raw = REDIS.get("stored-rooms")
     data = YAML::load(raw)
-    if (Time.now - data[:stored]) > 1.hour
+    if (Time.now - data[:stored]) > 10.minutes
       return update.call
     else
       return data[:rooms]
