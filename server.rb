@@ -14,6 +14,10 @@ REDIS = Redis.new({
 })
 
 def rooms
+  if Sinatra::Base.development?
+    return Available.new.calculate
+  end
+  
   update = lambda do
     rooms = Available.new.calculate
     REDIS.set("stored-rooms", { rooms: rooms, stored: Time.now }.to_yaml)
