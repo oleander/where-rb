@@ -13,7 +13,8 @@ class Available
     "4216",
     "4218",
     "ES62", 
-    "ES63"
+    "ES63",
+    "4228"
   ]
 
   def calculate
