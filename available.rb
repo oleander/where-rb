@@ -7,7 +7,21 @@ require "active_support"
 
 class Available
   NOW = -1
-  PRIO_ROOMS = ["HC4", "HC3", "HC2", "HC1", "HB4", "HB3", "HB2", "HB1", "HA4", "HA3", "HA2", "HA1", "EA", "EB", "EC", "ED", "EE", "ES51", "ES52", "ES53", "ES61", "3207", "3209", "3211", "3213", "3215", "3217", "4205", "4207", "4215", "5205", "5207", "5209", "5211", "5213", "5215", "5217", "6205", "6207", "6209", "6211", "6213", "6215", "EF", "EL41", "EL43", "EL42", "MA", "MB", "MC", "ML1", "ML11", "ML12", "ML13", "ML14", "ML15", "ML16", "ML2", "ML3", "ML4"]
+  PRIO_ROOMS = [
+    "HC4", "HC3", "HC2", "HC1", "HB4", 
+    "HB3", "HB2", "HB1", "HA4", "HA3", 
+    "HA2", "HA1", "EA", "EB", "EC", 
+    "ED", "EE", "ES51", "ES52", "ES53", 
+    "ES61", "3207", "3209", "3211", "3213", 
+    "3215", "3217", "4205", "4207", "4215", 
+    "5205", "5207", "5209", "5211", "5213",
+    "5215", "5217", "6205", "6207", "6209",
+    "6211", "6213", "6215", "EF", "EL41", 
+    "EL43", "EL42", "MA", "MB", "MC", 
+    "ML1", "ML11", "ML12", "ML13", 
+    "ML14", "ML15", "ML16", "ML2", 
+    "ML3", "ML4"
+  ]
 
   IGNORE_ROOMS = [
     "4216",
@@ -18,7 +32,8 @@ class Available
   ]
 
   def calculate
-    rooms = {}
+    rooms      = {}
+    candidates = []
 
     PRIO_ROOMS.each do |room|
       rooms[room] = []
@@ -52,7 +67,6 @@ class Available
       end
     end
 
-    candidates = []
     PRIO_ROOMS.each do |room|
       if rooms[room].empty?
         candidates << [room, []]
