@@ -1,12 +1,12 @@
 require "haml"
 require "sinatra"
 require "sinatra/content_for"
-require "./available"
+require "./src/available"
 require "redis"
 require "yaml"
 require "json"
 
-uri = URI.parse(ENV["REDISTOGO_URL"])
+uri = URI.parse(ENV.fetch("REDISTOGO_URL"))
 REDIS = Redis.new({
   host: uri.host, 
   port: uri.port, 
@@ -35,6 +35,8 @@ def rooms
     return update.call
   end
 end
+
+set :views, File.join(File.dirname(__FILE__), "../views")
 
 get "/" do
   @rooms = rooms
